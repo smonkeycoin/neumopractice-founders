@@ -71,6 +71,24 @@
     input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .micro{font-size:12px;color:#94A3B8;margin-top:8px}
+
+    .calendar-card{border:1px solid #DBEAFE;background:linear-gradient(180deg,#FFFFFF 0%,#F8FBFF 100%)}
+    .schedule-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
+    .day-card{border:1px solid #CBD5E1;background:#fff;border-radius:18px;padding:14px;min-height:178px}
+    .day-title{font-size:14px;font-weight:900;color:#1D4ED8;margin-bottom:10px;text-align:center}
+    .slot-list{display:grid;gap:8px}
+    .slot-option{position:relative;display:block}
+    .slot-option input{position:absolute;opacity:0;pointer-events:none}
+    .slot-option span{display:block;text-align:center;border:1px solid #D8E3F0;border-radius:12px;padding:9px 8px;font-size:13px;font-weight:800;color:#334155;background:#F8FAFC;cursor:pointer;transition:.16s ease}
+    .slot-option input:checked + span{background:#2563EB;color:#fff;border-color:#2563EB;box-shadow:0 10px 24px rgba(37,99,235,.22)}
+    .schedule-note{font-size:13px;color:#64748B;line-height:1.45;margin-top:12px}
+    .selected-slot{margin-top:14px;border:1px dashed #93C5FD;background:#EFF6FF;color:#1E3A8A;border-radius:16px;padding:12px 14px;font-size:14px;font-weight:800}
+    .send-status{width:100%;margin-top:14px;border-radius:16px;padding:12px 14px;font-size:14px;font-weight:800;display:none}
+    .send-status.ok{display:block;background:#DCFCE7;color:#14532D;border:1px solid #86EFAC}
+    .send-status.err{display:block;background:#FEE2E2;color:#7F1D1D;border:1px solid #FCA5A5}
+    @media(max-width:900px){.schedule-grid{grid-template-columns:1fr 1fr}.day-card{min-height:auto}}
+    @media(max-width:560px){.schedule-grid{grid-template-columns:1fr}}
+
     .footer-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#0F172A;color:#fff;border-radius:28px;padding:24px;margin-top:4px}
     .footer-actions p{margin:0;color:#CBD5E1;line-height:1.45;max-width:58ch}
     button{border:0;border-radius:16px;padding:14px 18px;font-weight:900;background:var(--success);color:#052E16;cursor:pointer;font-size:15px}
@@ -121,6 +139,7 @@
           <a href="#q6">Equipo y agenda</a>
           <a href="#q7">IA clínica</a>
           <a href="#q8">Decisión de compra</a>
+          <a href="#agenda">Horario entrevista</a>
         </div>
       </aside>
 
@@ -179,12 +198,81 @@
           <textarea name="decision_compra" required placeholder="Para adoptarlo tendría que..."></textarea>
         </div>
 
+        <div class="card calendar-card" id="agenda">
+          <div class="qhead"><div class="num">9</div><div><label>¿Qué día y horario te queda mejor para la entrevista?</label><p class="hint">Selecciona una opción disponible. Horarios en zona CDMX. La entrevista dura aproximadamente 20–30 minutos.</p></div></div>
+
+          <input type="hidden" name="preferred_slot" id="preferredSlot" required />
+
+          <div class="schedule-grid" role="radiogroup" aria-label="Horario preferido para entrevista beta">
+            <div class="day-card">
+              <div class="day-title">Lunes</div>
+              <div class="slot-list">
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 10:00 AM CDMX"><span>10:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 11:00 AM CDMX"><span>11:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 12:00 PM CDMX"><span>12:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 4:00 PM CDMX"><span>4:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 5:00 PM CDMX"><span>5:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Lunes 6:00 PM CDMX"><span>6:00 PM</span></label>
+              </div>
+            </div>
+            <div class="day-card">
+              <div class="day-title">Martes</div>
+              <div class="slot-list">
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 10:00 AM CDMX"><span>10:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 11:00 AM CDMX"><span>11:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 12:00 PM CDMX"><span>12:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 4:00 PM CDMX"><span>4:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 5:00 PM CDMX"><span>5:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Martes 6:00 PM CDMX"><span>6:00 PM</span></label>
+              </div>
+            </div>
+            <div class="day-card">
+              <div class="day-title">Miércoles</div>
+              <div class="slot-list">
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 10:00 AM CDMX"><span>10:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 11:00 AM CDMX"><span>11:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 12:00 PM CDMX"><span>12:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 4:00 PM CDMX"><span>4:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 5:00 PM CDMX"><span>5:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Miércoles 6:00 PM CDMX"><span>6:00 PM</span></label>
+              </div>
+            </div>
+            <div class="day-card">
+              <div class="day-title">Jueves</div>
+              <div class="slot-list">
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 10:00 AM CDMX"><span>10:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 11:00 AM CDMX"><span>11:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 12:00 PM CDMX"><span>12:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 4:00 PM CDMX"><span>4:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 5:00 PM CDMX"><span>5:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Jueves 6:00 PM CDMX"><span>6:00 PM</span></label>
+              </div>
+            </div>
+            <div class="day-card">
+              <div class="day-title">Viernes</div>
+              <div class="slot-list">
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 10:00 AM CDMX"><span>10:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 11:00 AM CDMX"><span>11:00 AM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 12:00 PM CDMX"><span>12:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 4:00 PM CDMX"><span>4:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 5:00 PM CDMX"><span>5:00 PM</span></label>
+                <label class="slot-option"><input type="radio" name="slot_picker" value="Viernes 6:00 PM CDMX"><span>6:00 PM</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="selected-slot" id="selectedSlotText">Selecciona un día y horario para la entrevista.</div>
+          <p class="schedule-note">Usaremos este horario como preferencia para coordinar la entrevista beta. Si necesitamos ajustar, te contactaremos por correo o WhatsApp.</p>
+        </div>
+
         <div class="footer-actions">
           <p><strong>Listo para entrevista.</strong><br>Al terminar, guarda o imprime esta página para usarla como guion de conversación beta.</p>
           <div>
             <button id="submitBtn" type="submit">Enviar respuestas</button>
-            <button type="button" onclick="window.print()">Imprimir / guardar PDF</button>
+            <button type="submit" id="submitBtn">Enviar respuestas</button>
+            <button type="button" class="ghost" onclick="window.print()">Imprimir / guardar PDF</button>
             <button class="ghost" type="reset">Limpiar</button>
+            <div id="sendStatus" class="send-status"></div>
             <div id="formStatus" class="submit-note" role="status" aria-live="polite"></div>
           </div>
         </div>
