@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NeumoPractice | Entrevista Beta</title>
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    :root{
+      --primary:#2563EB;
+      --primary-2:#60A5FA;
+      --bg:#F8FAFC;
+      --text:#111827;
+      --muted:#64748B;
+      --line:#E2E8F0;
+      --card:#FFFFFF;
+      --success:#22C55E;
+      --shadow: 0 22px 60px rgba(15,23,42,.12);
+      --radius: 24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.28), transparent 32rem),
+        linear-gradient(180deg,#fff 0%, var(--bg) 42%, #eef6ff 100%);
+      color:var(--text);
+    }
+    .shell{max-width:980px;margin:0 auto;padding:28px 18px 80px}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(18px);
+      background:rgba(248,250,252,.78);
+      border-bottom:1px solid rgba(226,232,240,.8);
+    }
+    .topbar-inner{max-width:980px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:12px}
+    .brand-mark{width:42px;height:42px;border-radius:14px;background:var(--primary);display:grid;place-items:center;box-shadow:0 10px 28px rgba(37,99,235,.22)}
+    .brand-mark img{width:28px;height:28px;object-fit:contain}
+    .brand-title{font-weight:800;letter-spacing:-.03em;font-size:18px}
+    .brand-sub{font-size:12px;color:var(--muted);margin-top:1px}
+    .hero{padding:52px 0 28px;display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(37,99,235,.18);color:#1D4ED8;background:rgba(37,99,235,.08);padding:8px 12px;border-radius:999px;font-weight:700;font-size:13px}
+    h1{font-size:clamp(36px,6vw,64px);line-height:.96;margin:18px 0 16px;letter-spacing:-.065em}
+    .lead{font-size:19px;line-height:1.55;color:#475569;max-width:58ch;margin:0}
+    .hero-card{background:linear-gradient(145deg,var(--primary),#1D4ED8);border-radius:32px;padding:32px;min-height:300px;color:white;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero-card:before{content:"";position:absolute;inset:-80px -70px auto auto;width:240px;height:240px;border-radius:999px;background:rgba(255,255,255,.14)}
+    .hero-card img{width:92px;height:92px;border-radius:24px;display:block;margin-bottom:28px;box-shadow:0 16px 40px rgba(0,0,0,.18)}
+    .hero-card h2{font-size:30px;line-height:1.05;letter-spacing:-.045em;margin:0 0 10px}
+    .hero-card p{margin:0;color:rgba(255,255,255,.86);line-height:1.55}
+    .form-wrap{display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start}
+    .sidebar{position:sticky;top:82px;background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:0 16px 44px rgba(15,23,42,.06)}
+    .sidebar strong{display:block;font-size:14px;margin-bottom:10px}
+    .progress{height:8px;background:#EAF1FF;border-radius:999px;overflow:hidden;margin:10px 0 14px}
+    .progress span{display:block;height:100%;width:68%;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:999px}
+    .sidebar p{font-size:13px;color:var(--muted);line-height:1.45;margin:0 0 12px}
+    .toc{display:grid;gap:8px;margin-top:12px}
+    .toc a{text-decoration:none;color:#334155;font-size:13px;padding:9px 10px;border-radius:12px;background:#F8FAFC;border:1px solid transparent}
+    .toc a:hover{border-color:#BFDBFE;color:#1D4ED8;background:#EFF6FF}
+    form{display:grid;gap:18px}
+    .card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 18px 48px rgba(15,23,42,.06)}
+    .qhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+    .num{flex:0 0 auto;width:34px;height:34px;border-radius:12px;background:#EFF6FF;color:#1D4ED8;font-weight:900;display:grid;place-items:center}
+    label{font-size:20px;font-weight:800;letter-spacing:-.025em;line-height:1.2;display:block}
+    .hint{font-size:14px;color:var(--muted);line-height:1.5;margin:8px 0 0}
+    textarea,input,select{
+      width:100%;border:1px solid #CBD5E1;background:#fff;border-radius:16px;padding:14px 15px;font:inherit;color:var(--text);outline:none;transition:.18s ease;margin-top:12px;
+    }
+    textarea{min-height:116px;resize:vertical;line-height:1.5}
+    input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .micro{font-size:12px;color:#94A3B8;margin-top:8px}
+    .footer-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#0F172A;color:#fff;border-radius:28px;padding:24px;margin-top:4px}
+    .footer-actions p{margin:0;color:#CBD5E1;line-height:1.45;max-width:58ch}
+    button{border:0;border-radius:16px;padding:14px 18px;font-weight:900;background:var(--success);color:#052E16;cursor:pointer;font-size:15px}
+    button:disabled{opacity:.68;cursor:not-allowed}
+    .ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18)}
+    .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden}
+    .submit-note{font-size:13px;margin-top:12px;color:#CBD5E1}
+    .submit-note.ok{color:#BBF7D0}
+    .submit-note.err{color:#FECACA}
+    @media(max-width:800px){.hero,.form-wrap,.grid-2{grid-template-columns:1fr}.sidebar{position:relative;top:auto}.hero{padding-top:32px}.hero-card{min-height:auto}h1{font-size:42px}}
+    @media print{.topbar,.sidebar,.footer-actions{display:none}.shell{max-width:100%;padding:0}.hero{display:block;padding:0}.hero-card{display:none}.form-wrap{display:block}.card{break-inside:avoid;box-shadow:none}.hero h1{font-size:34px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-mark"><img src="logo-icon.svg" alt="NeumoPractice"></div>
+      <div><div class="brand-title">NeumoPractice</div><div class="brand-sub">Entrevista beta para especialistas</div></div>
+    </div>
+  </div>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <span class="badge">Beta clínica · Conversación guiada de 20–30 min</span>
+        <h1>Cuéntanos cómo trabajas hoy.</h1>
+        <p class="lead">Este formulario no busca respuestas perfectas. Busca entender tu consulta real: qué sistema usas, dónde pierdes tiempo y qué tendría que resolver NeumoPractice para valer la pena en tu día a día.</p>
+      </div>
+      <aside class="hero-card">
+        <img src="app-icon.png" alt="NeumoPractice icon">
+        <h2>Menos captura. Más medicina.</h2>
+        <p>Usaremos tus respuestas como base para una entrevista breve, objetiva y útil. Idealmente llena lo esencial y deja los detalles para la conversación.</p>
+      </aside>
+    </section>
+
+    <section class="form-wrap">
+      <aside class="sidebar">
+        <strong>Guía rápida</strong>
+        <div class="progress"><span></span></div>
+        <p>Tiempo estimado: 8–12 min para llenar. La entrevista posterior dura 20–30 min.</p>
+        <div class="toc">
+          <a href="#datos">Datos básicos</a>
+          <a href="#q1">Sistema actual</a>
+          <a href="#q2">Dolores operativos</a>
+          <a href="#q3">Consulta ideal</a>
+          <a href="#q4">Expediente y seguimiento</a>
+          <a href="#q5">Recetas y documentos</a>
+          <a href="#q6">Equipo y agenda</a>
+          <a href="#q7">IA clínica</a>
+          <a href="#q8">Decisión de compra</a>
+        </div>
+      </aside>
+
+      <form id="betaForm">
+        <div class="card" id="datos">
+          <div class="qhead"><div class="num">0</div><div><label>Datos para contextualizar la entrevista</label><p class="hint">Solo lo necesario para entender el tipo de práctica y volumen de atención.</p></div></div>
+          <div class="grid-2">
+            <input name="nombre" placeholder="Nombre del doctor(a)" autocomplete="name" required />
+            <input name="especialidad" placeholder="Especialidad" required />
+            <input name="ciudad_clinica" placeholder="Ciudad / clínica" required />
+            <input name="pacientes_semana" placeholder="Pacientes por semana aprox." inputmode="numeric" />
+            <input name="email" type="email" placeholder="Correo para confirmar recepción" autocomplete="email" required />
+            <input name="whatsapp" placeholder="WhatsApp opcional" autocomplete="tel" />
+          </div>
+          <input class="hp" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        </div>
+
+        <div class="card" id="q1">
+          <div class="qhead"><div class="num">1</div><div><label>¿Qué sistema usas hoy para expediente, agenda, recetas y administración?</label><p class="hint">Incluye si usas software médico, Excel, WhatsApp, papel, Google Calendar, notas, o una mezcla.</p></div></div>
+          <textarea name="sistema_actual" required placeholder="Ejemplo: uso agenda en Google Calendar, recetas en Word, expediente en papel y WhatsApp para seguimiento..."></textarea>
+        </div>
+
+        <div class="card" id="q2">
+          <div class="qhead"><div class="num">2</div><div><label>¿Cuáles son las 3 tareas que más tiempo te quitan fuera de explorar y hablar con el paciente?</label><p class="hint">Buscamos fricción real: captura, búsqueda de datos, receta, cobros, reportes, llamadas, imágenes, seguimiento.</p></div></div>
+          <textarea name="dolores_operativos" required placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
+        </div>
+
+        <div class="card" id="q3">
+          <div class="qhead"><div class="num">3</div><div><label>Durante una consulta típica, ¿en qué momento sientes que el sistema actual te estorba?</label><p class="hint">Piensa en el flujo completo: llegada del paciente, historia clínica, exploración, diagnóstico, receta, pago y siguiente cita.</p></div></div>
+          <textarea name="momento_friccion" required placeholder="Describe el punto exacto donde se rompe el flujo..."></textarea>
+        </div>
+
+        <div class="card" id="q4">
+          <div class="qhead"><div class="num">4</div><div><label>¿Qué información del paciente necesitas encontrar rápido en una segunda consulta?</label><p class="hint">Ejemplos: diagnósticos previos, crisis, estudios, tratamiento, adherencia, vacunas, hospitalizaciones, evolución.</p></div></div>
+          <textarea name="info_segunda_consulta" required placeholder="Lo que más consulto cuando regresa un paciente es..."></textarea>
+        </div>
+
+        <div class="card" id="q5">
+          <div class="qhead"><div class="num">5</div><div><label>¿Cómo haces hoy recetas, indicaciones, certificados o documentos clínicos?</label><p class="hint">Queremos saber si duplicas texto, usas plantillas, imprimes, mandas PDF o WhatsApp, y qué tan frecuente lo corriges.</p></div></div>
+          <textarea name="recetas_documentos" required placeholder="Actualmente hago recetas con..., lo que más me molesta es..."></textarea>
+        </div>
+
+        <div class="card" id="q6">
+          <div class="qhead"><div class="num">6</div><div><label>¿Quién más participa en tu operación diaria y qué debería poder hacer sin depender de ti?</label><p class="hint">Recepción, asistente, otros doctores, administración. Agenda, confirmaciones, cobros, captura inicial, importación de pacientes.</p></div></div>
+          <textarea name="equipo_agenda" required placeholder="Mi recepcionista/asistente debería poder..."></textarea>
+        </div>
+
+        <div class="card" id="q7">
+          <div class="qhead"><div class="num">7</div><div><label>¿En qué parte aceptarías ayuda de IA clínica y en qué parte NO?</label><p class="hint">Diferencia entre apoyo administrativo, resumen clínico, SOAP, alertas, sugerencias, dictado, interpretación de estudios, etc.</p></div></div>
+          <textarea name="ia_clinica" required placeholder="Sí usaría IA para... / No usaría IA para..."></textarea>
+          <p class="micro">Nota: la entrevista también explorará límites de confianza, privacidad y validación médica.</p>
+        </div>
+
+        <div class="card" id="q8">
+          <div class="qhead"><div class="num">8</div><div><label>¿Qué tendría que pasar para que digas: “sí, esto me ahorra tiempo y lo pagaría”?</label><p class="hint">Respuesta clave: funcionalidades mínimas, precio aceptable, soporte, migración de pacientes, seguridad, facilidad de uso.</p></div></div>
+          <textarea name="decision_compra" required placeholder="Para adoptarlo tendría que..."></textarea>
+        </div>
+
+        <div class="footer-actions">
+          <p><strong>Listo para entrevista.</strong><br>Al terminar, guarda o imprime esta página para usarla como guion de conversación beta.</p>
+          <div>
+            <button id="submitBtn" type="submit">Enviar respuestas</button>
+            <button type="button" onclick="window.print()">Imprimir / guardar PDF</button>
+            <button class="ghost" type="reset">Limpiar</button>
+            <div id="formStatus" class="submit-note" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('betaForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('formStatus');
+
+    function setStatus(message, type){
+      statusEl.textContent = message || '';
+      statusEl.className = 'submit-note' + (type ? ' ' + type : '');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('', '');
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      if(payload.company_website){
+        setStatus('Gracias. Recibimos tus respuestas.', 'ok');
+        form.reset();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try{
+        const response = await fetch('/api/send-beta-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if(!response.ok) throw new Error(data.error || 'No se pudo enviar el formulario.');
+
+        setStatus('Listo. Recibimos tus respuestas y te contactaremos para la entrevista beta.', 'ok');
+        form.reset();
+      }catch(error){
+        setStatus(error.message || 'Error al enviar. Intenta de nuevo o mándanos captura por WhatsApp.', 'err');
+      }finally{
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar respuestas';
+      }
+    });
+  </script>
+
+</body>
+</html>
