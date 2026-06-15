@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       subject,
       html
     });
-
+console.log("RESEND RESULT:", JSON.stringify(result));
     return res.status(200).json({ ok: true, id: result?.data?.id || null });
   } catch (error) {
     console.error(error);
