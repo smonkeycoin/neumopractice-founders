@@ -147,10 +147,10 @@
         <div class="card" id="datos">
           <div class="qhead"><div class="num">0</div><div><label>Datos para contextualizar la entrevista</label><p class="hint">Solo lo necesario para entender el tipo de práctica y volumen de atención.</p></div></div>
           <div class="grid-2">
-            <input name="nombre" placeholder="Nombre del doctor(a)" autocomplete="name" required />
-            <input name="especialidad" placeholder="Especialidad" required />
-            <input name="ciudad_clinica" placeholder="Ciudad / clínica" required />
-            <input name="pacientes_semana" placeholder="Pacientes por semana aprox." inputmode="numeric" />
+            <input name="doctor_name" placeholder="Nombre del doctor(a)" autocomplete="name" required />
+            <input name="specialty" placeholder="Especialidad" required />
+            <input name="city" placeholder="Ciudad / clínica" required />
+            <input name="patients_week" placeholder="Pacientes por semana aprox." inputmode="numeric" />
             <input name="email" type="email" placeholder="Correo para confirmar recepción" autocomplete="email" required />
             <input name="whatsapp" placeholder="WhatsApp opcional" autocomplete="tel" />
           </div>
@@ -159,43 +159,43 @@
 
         <div class="card" id="q1">
           <div class="qhead"><div class="num">1</div><div><label>¿Qué sistema usas hoy para expediente, agenda, recetas y administración?</label><p class="hint">Incluye si usas software médico, Excel, WhatsApp, papel, Google Calendar, notas, o una mezcla.</p></div></div>
-          <textarea name="sistema_actual" required placeholder="Ejemplo: uso agenda en Google Calendar, recetas en Word, expediente en papel y WhatsApp para seguimiento..."></textarea>
+          <textarea name="q1" required placeholder="Ejemplo: uso agenda en Google Calendar, recetas en Word, expediente en papel y WhatsApp para seguimiento..."></textarea>
         </div>
 
         <div class="card" id="q2">
           <div class="qhead"><div class="num">2</div><div><label>¿Cuáles son las 3 tareas que más tiempo te quitan fuera de explorar y hablar con el paciente?</label><p class="hint">Buscamos fricción real: captura, búsqueda de datos, receta, cobros, reportes, llamadas, imágenes, seguimiento.</p></div></div>
-          <textarea name="dolores_operativos" required placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
+          <textarea name="q2" required placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
         </div>
 
         <div class="card" id="q3">
           <div class="qhead"><div class="num">3</div><div><label>Durante una consulta típica, ¿en qué momento sientes que el sistema actual te estorba?</label><p class="hint">Piensa en el flujo completo: llegada del paciente, historia clínica, exploración, diagnóstico, receta, pago y siguiente cita.</p></div></div>
-          <textarea name="momento_friccion" required placeholder="Describe el punto exacto donde se rompe el flujo..."></textarea>
+          <textarea name="q3" required placeholder="Describe el punto exacto donde se rompe el flujo..."></textarea>
         </div>
 
         <div class="card" id="q4">
           <div class="qhead"><div class="num">4</div><div><label>¿Qué información del paciente necesitas encontrar rápido en una segunda consulta?</label><p class="hint">Ejemplos: diagnósticos previos, crisis, estudios, tratamiento, adherencia, vacunas, hospitalizaciones, evolución.</p></div></div>
-          <textarea name="info_segunda_consulta" required placeholder="Lo que más consulto cuando regresa un paciente es..."></textarea>
+          <textarea name="q4" required placeholder="Lo que más consulto cuando regresa un paciente es..."></textarea>
         </div>
 
         <div class="card" id="q5">
           <div class="qhead"><div class="num">5</div><div><label>¿Cómo haces hoy recetas, indicaciones, certificados o documentos clínicos?</label><p class="hint">Queremos saber si duplicas texto, usas plantillas, imprimes, mandas PDF o WhatsApp, y qué tan frecuente lo corriges.</p></div></div>
-          <textarea name="recetas_documentos" required placeholder="Actualmente hago recetas con..., lo que más me molesta es..."></textarea>
+          <textarea name="q5" required placeholder="Actualmente hago recetas con..., lo que más me molesta es..."></textarea>
         </div>
 
         <div class="card" id="q6">
           <div class="qhead"><div class="num">6</div><div><label>¿Quién más participa en tu operación diaria y qué debería poder hacer sin depender de ti?</label><p class="hint">Recepción, asistente, otros doctores, administración. Agenda, confirmaciones, cobros, captura inicial, importación de pacientes.</p></div></div>
-          <textarea name="equipo_agenda" required placeholder="Mi recepcionista/asistente debería poder..."></textarea>
+          <textarea name="q6" required placeholder="Mi recepcionista/asistente debería poder..."></textarea>
         </div>
 
         <div class="card" id="q7">
           <div class="qhead"><div class="num">7</div><div><label>¿En qué parte aceptarías ayuda de IA clínica y en qué parte NO?</label><p class="hint">Diferencia entre apoyo administrativo, resumen clínico, SOAP, alertas, sugerencias, dictado, interpretación de estudios, etc.</p></div></div>
-          <textarea name="ia_clinica" required placeholder="Sí usaría IA para... / No usaría IA para..."></textarea>
+          <textarea name="q7" required placeholder="Sí usaría IA para... / No usaría IA para..."></textarea>
           <p class="micro">Nota: la entrevista también explorará límites de confianza, privacidad y validación médica.</p>
         </div>
 
         <div class="card" id="q8">
           <div class="qhead"><div class="num">8</div><div><label>¿Qué tendría que pasar para que digas: “sí, esto me ahorra tiempo y lo pagaría”?</label><p class="hint">Respuesta clave: funcionalidades mínimas, precio aceptable, soporte, migración de pacientes, seguridad, facilidad de uso.</p></div></div>
-          <textarea name="decision_compra" required placeholder="Para adoptarlo tendría que..."></textarea>
+          <textarea name="q8" required placeholder="Para adoptarlo tendría que..."></textarea>
         </div>
 
         <div class="card calendar-card" id="agenda">
@@ -269,7 +269,6 @@
           <p><strong>Listo para entrevista.</strong><br>Al terminar, guarda o imprime esta página para usarla como guion de conversación beta.</p>
           <div>
             <button id="submitBtn" type="submit">Enviar respuestas</button>
-            <button type="submit" id="submitBtn">Enviar respuestas</button>
             <button type="button" class="ghost" onclick="window.print()">Imprimir / guardar PDF</button>
             <button class="ghost" type="reset">Limpiar</button>
             <div id="sendStatus" class="send-status"></div>
@@ -284,11 +283,35 @@
     const form = document.getElementById('betaForm');
     const submitBtn = document.getElementById('submitBtn');
     const statusEl = document.getElementById('formStatus');
+    const sendStatusEl = document.getElementById('sendStatus');
+    const preferredSlot = document.getElementById('preferredSlot');
+    const selectedSlotText = document.getElementById('selectedSlotText');
 
     function setStatus(message, type){
-      statusEl.textContent = message || '';
-      statusEl.className = 'submit-note' + (type ? ' ' + type : '');
+      if (statusEl) {
+        statusEl.textContent = message || '';
+        statusEl.className = 'submit-note' + (type ? ' ' + type : '');
+      }
+      if (sendStatusEl) {
+        sendStatusEl.textContent = message || '';
+        sendStatusEl.className = 'send-status' + (type ? ' ' + type : '');
+      }
     }
+
+    document.querySelectorAll('input[name="slot_picker"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        preferredSlot.value = radio.value;
+        selectedSlotText.textContent = 'Horario seleccionado: ' + radio.value;
+      });
+    });
+
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        preferredSlot.value = '';
+        selectedSlotText.textContent = 'Selecciona un día y horario para la entrevista.';
+        setStatus('', '');
+      }, 0);
+    });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -297,9 +320,36 @@
       const formData = new FormData(form);
       const payload = Object.fromEntries(formData.entries());
 
+      // Compatibilidad con cualquier versión previa del backend.
+      payload.nombre = payload.doctor_name || '';
+      payload.especialidad = payload.specialty || '';
+      payload.ciudad_clinica = payload.city || '';
+      payload.pacientes_semana = payload.patients_week || '';
+      payload.sistema_actual = payload.q1 || '';
+      payload.dolores_operativos = payload.q2 || '';
+      payload.momento_friccion = payload.q3 || '';
+      payload.info_segunda_consulta = payload.q4 || '';
+      payload.recetas_documentos = payload.q5 || '';
+      payload.equipo_agenda = payload.q6 || '';
+      payload.ia_clinica = payload.q7 || '';
+      payload.decision_compra = payload.q8 || '';
+
       if(payload.company_website){
         setStatus('Gracias. Recibimos tus respuestas.', 'ok');
         form.reset();
+        return;
+      }
+
+      if(!payload.doctor_name || !payload.doctor_name.trim()){
+        setStatus('Falta el nombre del doctor.', 'err');
+        document.querySelector('[name="doctor_name"]').scrollIntoView({behavior:'smooth', block:'center'});
+        document.querySelector('[name="doctor_name"]').focus();
+        return;
+      }
+
+      if(!payload.preferred_slot || !payload.preferred_slot.trim()){
+        setStatus('Selecciona un día y horario para la entrevista.', 'err');
+        document.getElementById('agenda').scrollIntoView({behavior:'smooth', block:'center'});
         return;
       }
 
